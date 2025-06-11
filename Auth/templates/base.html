@@ -95,14 +95,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item"> <a class="nav-link active" aria-current="page" href="/">게시판</a> </li>
+            <li class="nav-item"> <a class="nav-link active" aria-current="page" href="/post/list">게시판</a> </li>
           </ul>
-          <div class="d-flex">
+          <div class="d-flex gap-4">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               {% if user.is_authenticated %}
-              <li class="nav-item"> <a class="nav-link" href="">글쓰기</a> </li>
+              <li class="nav-item"> <a class="nav-link" href="/post/create">글쓰기</a> </li>
               <li class="nav-item"> <a class="nav-link" href="">{{ user.username }}</a> </li>
-              <li class="nav-item"> <a class="nav-link" href="">로그아웃</a> </li>
+              <li class="nav-item">
+                <form action="/accounts/logout/" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-outline-primary">
+                    로그아웃
+                  </button>
+                </form>
+              </li>
               {% else %}
               <li class="nav-item"> <a class="nav-link" href="/accounts/login">로그인</a> </li>
               <li class="nav-item"> <a class="nav-link" href="/accounts/signup">회원가입</a> </li>
